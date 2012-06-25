@@ -49,7 +49,7 @@ heroku create --stack cedar
 
 g p heroku master
 
-heroku rename cosmos-english-reader
+heroku rename cosmos-news-reader-2
 
 git remote rm heroku
 
