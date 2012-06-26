@@ -1,4 +1,9 @@
 NewsReader2::Application.routes.draw do
+  # root
+  root :to => "articles#index"
+
+  resources :articles
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

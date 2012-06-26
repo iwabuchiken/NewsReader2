@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NewsReader2</title>
+  <title>NewsReader</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  
+<!--   <meta charset="euc-jp" /> -->
+  
+<!--   <meta http-equiv="Content-Type" content="text/html; charset=euc-jp"> -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+<!--   <meta http-equiv="Content-Type" content="text/html; charset=euc-jp" > -->
 </head>
 <body>
+
 
 <%= yield %>
 

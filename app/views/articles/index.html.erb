@@ -1,0 +1,65 @@
+<h1 class="title" id="top">
+	<% if @genre == "soci" %>
+		Society
+	<% elsif @genre == "int" %>
+		Overseas
+	<% elsif @genre == "bus_all" %>
+		Economy
+	<% else %>
+		Society
+	<% end %>
+</h1>
+<%= @testword %>
+<br/>
+
+<br/>
+<div>
+	<%= link_to 'Society', 
+			:controller => "articles", 
+			:action => "index", 
+			:genre => "soci" %> |
+	<%= link_to 'Econ', 
+			:controller => "articles", 
+			:action => "index", 
+			:genre => "bus_all" %> | 
+	<%= link_to 'Overseas', 
+			:controller => "articles", 
+			:action => "index", 
+			:genre => "int" %>
+</div>
+
+<hr/>
+	<% @categories.each do |category| %>
+		<a href="#<%= category%>"><%= category %></a> | 
+	<% end %>
+
+<% @categories.length.times do |i| %>
+	<hr/>
+	<div id="<%= @categories[i] %>" class="category" >
+		<strong><%= @categories[i] %></strong> (<%= @objects[i].size %> 
+		<% if @objects[i].size < 2 %>
+			item
+		<% else %>
+			items
+		<% end %>
+		) 
+			   &nbsp;&nbsp;<a href="#top">To Top</a>
+	</div>
+	<hr/>
+
+	<% @i = 1 %>
+	<% @objects[i].each do |item| %>
+		<%#= raw item.to_html %>
+		<%# item.each do |article| %>
+			<div style="line-height: 250%;">
+				<%#= raw item[0] %>
+				<%#= raw article %>
+				<%= @i %>. <%= raw item %><br/>
+				<% @i += 1 %>
+				<%#= item.content %>
+			</div>
+		<%# end %>
+	<% end %>
+	<br/>
+
+<% end %>
