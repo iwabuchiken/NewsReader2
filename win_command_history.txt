@@ -1,9 +1,9 @@
 a
-cd C:\WORKS\WORKSPACES_APTANA\NewsReader_eclipse
+cd C:\WORKS\WORKSPACES_APTANA\NewsReader2
 gitk
 
 a
-cd C:\WORKS\WORKSPACES_APTANA\NewsReader_eclipse
+cd C:\WORKS\WORKSPACES_APTANA\NewsReader2
 r s
 
 [Set up 20120529_173711]----------------------------
