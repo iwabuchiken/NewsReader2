@@ -10,10 +10,14 @@ class ArticlesController < ApplicationController
   # @categories = []
     
   def index
+    #=================================
+    @objects = try_nokogiri_17    # Categorize => "Society"
     
-    @objects = try_nokogiri_16    # Modify link
+    #=================================
+    # @objects = try_nokogiri_16    # Modify link
 
-    # @testword = "体積"  #=================================
+    # @testword = "体積"  
+    #=================================
     
     
     # @try = "try_nokogiri_15"
@@ -173,368 +177,8 @@ class ArticlesController < ApplicationController
     end
   end
 
-  private #================================
-  
-  def get_xml_base
-    builder = Nokogiri::XML::Builder.new do |xml|
-    end
-    
-    return Nokogiri::XML(builder.to_xml)
-  end#def get_xml_base
-    
-  def try_nokogiri_1
-    # NokoHelper
-    noko_helper = NokoHelper::NokoHelper.new
-    
-    # Get base
-    xml_base = NokoHelper::NokoHelper.new.get_xml_base
-    
-    # Get node
-    node1 = noko_helper.get_node(xml_base, "LinearLayout")
-    
-    # Add child
-    noko_helper.add_child(xml_base, node1)
-    
-    # Set attributes
-    noko_helper.set_attribute(
-            node1, 
-            "xmlns:android", "http://schemas.android.com/apk/res/android")
-    
-    # Add another child
-    # node2 = noko_helper.get_node(xml_base, "Button")
-    # noko_helper.set_attribute(
-            # node2, 
-            # "android:orientation", "vertical")
-    # # noko_helper.add_child(xml_base, node2)
-    # noko_helper.add_next_sibling(xml_base, node2)
-    
-    return xml_base
-     
-  end#def try_nokogiri_1
-
-  def try_nokogiri_2
-    return NokoHelper::HTMLParser.new.open_html("http://headlines.yahoo.co.jp/hl?c=soci&t=l")
-  end#def try_nokogiri_2
-  
-  def try_nokogiri_3
-    doc = try_nokogiri_2
-    
-    # a_tags = doc.xpath("//a")
-    # a_tags = doc.css("//a")
-    
-    tags = doc.css("div ul li a")
-    
-    return tags
-    # return a_tags
-    # return doc
-  end
-
-  # ============ try 4 ========================
-  def get_html_doc(url)
-    return NokoHelper::HTMLParser.new.open_html(url)
-  end#def get_html_doc(url)
-  
-  def try_nokogiri_4
-    # Url
-    url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l"
-    
-    doc = get_html_doc(url)
-    
-    tags = doc.css("div ul li a")
-    
-    # Get new tags
-    url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=1"
-    doc = get_html_doc(url)
-    tags_2 = doc.css("div ul li a")
-    
-    # Append the new tags   => 2
-    tags_2.each do |tag|
-      tags.push(tag)
-    end
-    
-    # Get new tags
-    url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=2"
-    doc = get_html_doc(url)
-    tags_2 = doc.css("div ul li a")
-    
-    # Append the new tags
-    tags_2.each do |tag|
-      tags.push(tag)
-    end
-    
-    # Get new tags          => 3
-    url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=3"
-    doc = get_html_doc(url)
-    tags_2 = doc.css("div ul li a")
-    
-    # Append the new tags
-    tags_2.each do |tag|
-      tags.push(tag)
-    end
-
-    # # Iteration
-    # 5.times do |i|
-      # # Next page
-      # # url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=1"
-      # # url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=" + i.to_s
-      # url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=" + (i + 1).to_s
-#       
-      # doc = get_html_doc(url)
-#       
-      # tags_2 = doc.css("div ul li a")
-#       
-      # # Append new tags
-      # tags_2.each do |tag|
-        # tags.push(tag)
-      # end
-    # end
-      
-    
-    return tags
-    # return a_tags
-    # return doc
-  end#def try_nokogiri_4
-
-  # ============ try 5 ========================
-  def try_nokogiri_5
-    # Url
-    url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l"
-    
-    doc = get_html_doc(url)
-    
-    tags = doc.css("div ul li a")
-    
-    # Get new tags
-    url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=1"
-    doc = get_html_doc(url)
-    tags_2 = doc.css("div ul li a")
-    
-    # Append the new tags   => 2
-    tags_2.each do |tag|
-      tags.push(tag)
-    end
-    
-    # Get new tags
-    url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=2"
-    doc = get_html_doc(url)
-    tags_2 = doc.css("div ul li a")
-    
-    # Append the new tags
-    tags_2.each do |tag|
-      tags.push(tag)
-    end
-    
-    # Get new tags          => 3
-    url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=3"
-    doc = get_html_doc(url)
-    tags_2 = doc.css("div ul li a")
-    
-    # Append the new tags
-    tags_2.each do |tag|
-      tags.push(tag)
-    end
-    
-    return tags
-    # return a_tags
-    # return doc
-  end#def try_nokogiri_5
-
-  # ============ try 6 ========================
-  def get_tags()
-    # Url
-    url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l"
-    
-    doc = get_html_doc(url)
-    
-    tags = doc.css("div ul li a")
-    
-    # # Get new tags
-    # url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=1"
-    # doc = get_html_doc(url)
-    # tags_2 = doc.css("div ul li a")
-#     
-    # # Append the new tags   => 2
-    # tags_2.each do |tag|
-      # tags.push(tag)
-    # end
-#     
-    # # Get new tags
-    # url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=2"
-    # doc = get_html_doc(url)
-    # tags_2 = doc.css("div ul li a")
-#     
-    # # Append the new tags
-    # tags_2.each do |tag|
-      # tags.push(tag)
-    # end
-#     
-    # # Get new tags          => 3
-    # url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=3"
-    # doc = get_html_doc(url)
-    # tags_2 = doc.css("div ul li a")
-#     
-    # # Append the new tags
-    # tags_2.each do |tag|
-      # tags.push(tag)
-    # end
-  
-    return tags    
-  end#def get_tags()
-  
-  def try_nokogiri_6
-    tags = get_tags
-    
-    # # Modify the tags
-    # tags.each do |tag|
-      # if tag['href'].start_with?("/hl?")
-#         
-      # end
-      # # tags_new
-    # end
-    
-    return tags
-    # return a_tags
-    # return doc
-  end#def try_nokogiri_6
-
-  # ============ try 7 ========================
-  def try_nokogiri_7
-    # NodeSet
-    #tags = Nokogiri::XML::NodeSet.new
-    
-    # Thread 1
-    th1 = Thread.new do
-      tags = get_tags
-    end
-    #tags = get_tags
-    
-    # # Modify the tags
-    # tags.each do |tag|
-      # if tag['href'].start_with?("/hl?")
-#         
-      # end
-      # # tags_new
-    # end
-    
-    return tags
-    # return a_tags
-    # return doc
-  end#def try_nokogiri_7
-
-  # ============ try 8 ========================
-  def try_nokogiri_8
-    # Urls
-    urls = [
-      "http://headlines.yahoo.co.jp/hl?c=soci&t=l",
-      "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=1"
-    ]
-    
-    # HTML docs
-    docs = []
-    
-    # Thread array
-    threads = []
-    
-    # Get docs
-    2.times do |i|
-      # Get docs
-      threads << Thread.start(i, urls) do
-        # puts "Thred #{i.to_s}: " + urls[i] 
-        docs[i] = Nokogiri::HTML(open(urls[i]))
-      end
-    
-      # Join
-      threads.each do |t|
-        t.join
-      end
-    end
-    
-    # Return
-    return docs
-    # return docs
-    
-  end#def try_nokogiri_8
-
-  # ============ try 9 ========================
-  def try_nokogiri_9
-    # # Urls
-    # urls = [
-      # "http://headlines.yahoo.co.jp/hl?c=soci&t=l",
-      # "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p=1"
-    # ]
-    
-    # Urls
-    url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p="
-    
-    # HTML docs
-    docs = []
-    
-    # Thread array
-    threads = []
-    
-    # Get docs
-    # 2.times do |i|
-    5.times do |i|
-      # Get docs
-      # threads << Thread.start(i, urls) do
-      threads << Thread.start(i, url) do
-        # puts "Thred #{i.to_s}: " + urls[i] 
-        # docs[i] = Nokogiri::HTML(open(urls[i]))
-        docs[i] = Nokogiri::HTML(open(url + (i + 1).to_s))
-      end
-    
-      # Join
-      threads.each do |t|
-        t.join
-      end
-    end
-    
-    # Return
-    return docs
-    # return docs
-    
-  end#def try_nokogiri_9
-
-  # ============ try 10 ========================
-  def try_nokogiri_10
-    # Get params
-    genre = params['genre']
-    
-    # Urls
-    if genre != nil
-      # url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p="
-      url = "http://headlines.yahoo.co.jp/hl?c=#{genre}&t=l&p="
-    else
-      url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p="
-    end
-    
-    # HTML docs
-    docs = []
-    
-    # Thread array
-    threads = []
-    
-    # Get docs
-    # 2.times do |i|
-    5.times do |i|
-      # Get docs
-      threads << Thread.start(i, url) do
-        # puts "Thred #{i.to_s}: " + urls[i] 
-        # docs[i] = Nokogiri::HTML(open(urls[i]))
-        docs[i] = Nokogiri::HTML(open(url + (i + 1).to_s))
-      end
-    
-      # Join
-      threads.each do |t|
-        t.join
-      end
-    end
-    
-    # Return
-    return docs
-    
-  end#def try_nokogiri_10
-  
+  private 
+  #================================
   # ============ try 11 ========================
   def get_docs(number)
         # Get params
@@ -574,194 +218,6 @@ class ArticlesController < ApplicationController
     return docs
 
   end#def get_docs(number)
-  
-  def try_nokogiri_11
-    # Get doc
-    #docs = get_docs(3)
-    docs = get_docs(1)
-    
-    # Modify
-    docs.each do |doc|
-      # Get 'a' tags
-      a_tags = doc.css("div ul li a")
-      
-      # href value
-      a_tags.each do |a_tag|
-        if a_tag['href'].start_with?("/hl?")
-          a_tag['href'] = "http://headlines.yahoo.co.jp" + a_tag['href']
-        end
-      end
-      
-    end
-    
-    return docs
-    
-#    # Get params
-#    genre = params['genre']
-#    
-#    # Urls
-#    if genre != nil
-#      # url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p="
-#      url = "http://headlines.yahoo.co.jp/hl?c=#{genre}&t=l&p="
-#    else
-#      url = "http://headlines.yahoo.co.jp/hl?c=soci&t=l&p="
-#    end
-#    
-#    # HTML docs
-#    docs = []
-#    
-#    # Thread array
-#    threads = []
-#    
-#    # Get docs
-#    # 2.times do |i|
-#    5.times do |i|
-#      # Get docs
-#      threads << Thread.start(i, url) do
-#        # puts "Thred #{i.to_s}: " + urls[i] 
-#        # docs[i] = Nokogiri::HTML(open(urls[i]))
-#        docs[i] = Nokogiri::HTML(open(url + (i + 1).to_s))
-#      end
-#    
-#      # Join
-#      threads.each do |t|
-#        t.join
-#      end
-#    end
-#    
-#    # Return
-#    return docs
-    
-  end#def try_nokogiri_11
-
-  # ============ try 12 ========================
-  def try_nokogiri_12
-    # Get doc
-    #docs = get_docs(3)
-    #docs = get_docs(1)
-    docs = get_docs(5)
-    
-    #meta_tags
-    meta_tags = nil
-    
-    # New docs
-    docs_new = []
-    
-    # Modify
-    docs.each do |doc|
-      #--------------------
-      # Modify 'a' tags
-      #--------------------
-      
-      # Get 'a' tags
-      a_tags = doc.css("div ul li a")
-      
-      # href value
-      a_tags.each do |a_tag|
-        if a_tag['href'].start_with?("/hl?")
-          # Modify url
-          a_tag['href'] = "http://headlines.yahoo.co.jp" + a_tag['href']
-          
-        end#if a_tag['href'].start_with?("/hl?")
-      end#a_tags.each do |a_tag|
-      
-      #--------------------
-      # Modify 'charset' value
-      #--------------------
-      
-      # Get 'meta' tags
-      meta_tags = doc.css("//meta")
-      
-      #debug
-#      return meta_tags
-      
-      # Include?
-      meta_tags.each do |meta_tag|
-        #if meta_tag['content'] == "text/html; charset=euc-jp"
-        if meta_tag['content'].include?("text/html; charset=euc-jp")
-          meta_tag['content'] = "text/html; charset=utf-8"
-        end
-      end
-#      
-    end#docs.each do |doc|
-    
-    #debug
-#    return meta_tags
-    
-#    
-    return docs
-    # return docs_new
-    
-  end#def try_nokogiri_12
-
-  # ============ try 13 ========================
-  def try_nokogiri_13
-    # Get doc
-    #docs = get_docs(3)
-    #docs = get_docs(1)
-    docs = get_docs(5)
-    
-    #meta_tags
-    meta_tags = nil
-    
-    # New docs
-    docs_new = []
-    
-    # Modify
-    docs.each do |doc|
-      #--------------------
-      # Modify 'a' tags
-      #--------------------
-      
-      # Get 'a' tags
-      a_tags = doc.css("div ul li a")
-      
-      # href a tags
-      a_tags_href = []
-      
-      # href value
-      a_tags.each do |a_tag|
-        if a_tag['href'].start_with?("/hl?")
-          # Modify url
-          a_tag['href'] = "http://headlines.yahoo.co.jp" + a_tag['href']
-          
-          # Add
-          a_tags_href.push(a_tag)
-          
-        end#if a_tag['href'].start_with?("/hl?")
-      end#a_tags.each do |a_tag|
-      
-      # New doc
-      docs_new.push(a_tags_href)
-      
-      #--------------------
-      # Modify 'charset' value
-      #--------------------
-      
-      # Get 'meta' tags
-      meta_tags = doc.css("//meta")
-      
-      #debug
-#      return meta_tags
-      
-      # Include?
-      meta_tags.each do |meta_tag|
-        #if meta_tag['content'] == "text/html; charset=euc-jp"
-        if meta_tag['content'].include?("text/html; charset=euc-jp")
-          meta_tag['content'] = "text/html; charset=utf-8"
-        end
-      end
-#      
-    end#docs.each do |doc|
-    
-    #debug
-#    return meta_tags
-    
-#    
-    # return docs
-    return docs_new
-    
-  end#def try_nokogiri_13
 
   # ============ try 14 ========================
   def get_atags(docs)
@@ -1403,6 +859,494 @@ class ArticlesController < ApplicationController
     # return docs_new
     
   end#def try_nokogiri_16
+
+  # ============ try 17 ========================
+  def categorize_try17_others(a_tags)
+    #######################
+    # Steps
+    # 1. 
+    
+    
+    #######################
+    # 1.
+    cat_usa = []; cat_china = [];
+    cat_europe = []; cat_others = [];
+    
+    # 
+    a_tags_categorized = []
+    
+    #
+    #kw_usa = ["アメリカ", "米国", "米"] 
+    kw_usa = ["アメリカ", "米国", "米"]
+    # kw_usa = [u"アメリカ", u"米国", u"米"]gs.each do |a_tag|
+    
+    kw_china = ["中国"]
+    
+    kw_europe = ["ヨーロッパ", "欧州", "フランス", "ドイツ", "イギリス", "欧", "EU", "ギリシャ"]
+    
+    #
+    a_tags.each do |a_tag|
+      # Flag
+      is_in = false
+      
+      #
+      kw_usa.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_usa.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_usa.each do |word|
+        # else
+
+      #
+      kw_china.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_china.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_usa.each do |word|
+
+      #
+      kw_europe.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_europe.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_europe.each do |word|
+
+      #
+      if is_in == false
+        cat_others.push(a_tag)
+      end#if is_in == false
+          
+        # end#if a_tag.content.include?(word)
+      # end#kw_usa.each do |word|
+    end#a_tags.each do |a_tag|
+      
+    # Return
+    return [cat_usa, cat_china, cat_europe, cat_others]    
+  end#def categorize_try17_others(a_tags)
+
+  def categorize_try17_society(a_tags)
+    #######################
+    # Steps
+    # 1. 
+    
+    
+    #######################
+    # 1.
+    cat_nuc_plants = []; cat_china_taiwan = [];
+    cat_tax = []; cat_osaka = []; cat_enterprises = [];
+    cat_incidents = []; cat_others = []
+    
+    # 
+    a_tags_categorized = []
+    
+    #
+    #kw_usa = ["アメリカ", "米国", "米"] 
+    kw_nuc_plants = ["原発", "原子力", "原子力発電所"]
+    # kw_usa = [u"アメリカ", u"米国", u"米"]gs.each do |a_tag|
+    
+    kw_china_taiwan = ["中国", "台湾"]
+    
+    kw_tax = ["税", "税金", "消費税", "脱税"]
+    
+    kw_osaka = ["大阪", "橋下", "阪神", "関西"]
+    
+    kw_enterprises = ["企業", "会社", "ソニー", "パナ", 
+                      "パナソニック", "シャープ", "社内", "社外",
+                      "日興證券", "日興"]
+    
+    kw_incidents = ["逮捕", "事件", "犯罪", "犯", "罪", 
+                     "虐待", "暴行", "傷害", "遺棄"]
+    
+    #
+    a_tags.each do |a_tag|
+      # Flag
+      is_in = false
+      
+      #
+      kw_nuc_plants.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_nuc_plants.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_nuc_plants.each do |word|
+
+      #
+      kw_china_taiwan.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_china_taiwan.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_china_taiwan.each do |word|
+
+      #
+      kw_tax.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_tax.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_tax.each do |word|
+
+      #
+      kw_osaka.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_osaka.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_osaka.each do |word|
+
+      #
+      kw_enterprises.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_enterprises.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_enterprises.each do |word|
+
+      #
+      kw_incidents.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_incidents.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_incidents.each do |word|
+
+      #
+      if is_in == false
+        cat_others.push(a_tag)
+      end#if is_in == false
+          
+        # end#if a_tag.content.include?(word)
+      # end#kw_usa.each do |word|
+    end#a_tags.each do |a_tag|
+    
+    # Return
+    return [cat_nuc_plants, cat_china_taiwan, 
+              cat_tax, cat_osaka, cat_enterprises, 
+              cat_incidents,cat_others]
+
+  end#def categorize_try17_others(a_tags)
+  
+  def categorize_try17_overseas(a_tags)
+    #######################
+    # Steps
+    # 1. 
+    
+    
+    #######################
+    # 1.
+    cat_usa = []; cat_china = [];
+    cat_europe = []; cat_korea = [];
+    cat_me = []; cat_india = []
+    cat_others = [];
+    
+    # 
+    a_tags_categorized = []
+    
+    #
+    kw_usa = ["アメリカ", "米国", "米"] 
+    # kw_usa = [u"アメリカ", u"米国", u"米"]gs.each do |a_tag|
+    
+    kw_china = ["中国"]
+    
+    kw_europe = [
+            # Countries
+            "フランス", "ドイツ", "イギリス", "ギリシャ", "ロシア", "イタリア",
+            "独", "仏", "英", "伊", "露",
+            # Cities
+            "ベルリン", "パリ", "ロンドン", "モスクワ",
+            # Europe
+            "欧", "欧州", "ヨーロッパ", "EU", "ユーロ" 
+            ]
+    
+    kw_korea = [
+            # Countries, Regions
+            "韓国", "韓", "朝鮮",
+            # Cities
+            "ソウル", "ピョンヤン", "平城"
+            ]
+    
+    kw_me = ["中東", 
+              # Countries
+              "シリア", "ヨルダン", "イラク", "イラン", "エジプト",
+              "イスラエル",
+              # Groups
+              "ハマス"
+              ]
+    
+    kw_india = ["インド"]
+    
+    #
+    a_tags.each do |a_tag|
+      #=============================
+      # 1. USA
+      # 2. China
+      # 3. Europe
+      # 4. Korea
+      # 5. Middle East
+      # 6. India
+      # 0. Others
+      #=============================
+      # Flag
+      is_in = false
+      
+      #
+      kw_usa.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_usa.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_usa.each do |word|
+        # else
+
+      #===================
+      # 2. China
+      #===================
+      kw_china.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_china.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_usa.each do |word|
+
+      #===================
+      # 3. Europe
+      #===================
+      kw_europe.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_europe.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_europe.each do |word|
+
+      #===================
+      # 4. Korea
+      #===================
+      kw_korea.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_korea.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_europe.each do |word|
+
+      #===================
+      # 5. Middle East
+      #===================
+      kw_me.each do |word|
+        #
+        if a_tag.content.include?(word)
+          cat_me.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_europe.each do |word|
+
+      #===================
+      # 6. India
+      #===================
+      kw_india.each do |word|
+        #
+        if a_tag.content.include?(word) \
+            and not a_tag.content.include?("インドネシア")
+          cat_india.push(a_tag)
+          
+          #
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_europe.each do |word|
+
+      #===================
+      # 
+      #===================
+      if is_in == false
+        cat_others.push(a_tag)
+      end#if is_in == false
+          
+        # end#if a_tag.content.include?(word)
+      # end#kw_usa.each do |word|
+    end#a_tags.each do |a_tag|
+      
+    # Return
+    return [cat_usa, cat_china, cat_europe, 
+              cat_korea, cat_me, cat_india,
+              cat_others]    
+  end#def categorize_overseas(a_tags)
+
+  def categorize_try17(a_tags)
+    #######################
+    # Steps
+    # 1. 
+    
+    
+    #######################
+    # Param
+    @genre = params['genre']
+
+    # Switching
+    if @genre == "int"
+      a_tags_categorized = categorize_try17_overseas(a_tags)
+    elsif @genre == "soci"
+      a_tags_categorized = categorize_try17_society(a_tags)
+    else
+      a_tags_categorized = categorize_try17_others(a_tags)
+    end
+    
+    # Return
+    return a_tags_categorized
+    
+  end#def categorize_try17(a_tags)
+
+  def try_nokogiri_17
+    ###########################
+    # Steps
+    # 1. Get categories
+    # 2. Get docs
+    # 3. Get a_tags    
+    ###########################
+    
+    #=====================
+    # 1. Get categories
+    #=====================
+    # Param
+    @genre = params['genre']
+
+    # Switch
+    if @genre == "soci"
+      @categories = ["Nuc Plants", "China, Taiwan", 
+                      "Taxes", "Osaka", "Enterprises", "Incidents", "Others"]
+      #@categories = ["原発", "中国・台湾", "税金", "大阪"]
+
+    elsif @genre == "int"
+        # @categories = ["USA", "China", "Europe", "Others"]
+        @categories = \
+              ["USA", "China", "Europe", "Korea",
+                    "Middle East", "India", "Others"]
+    elsif @genre == "bus_all"
+        @categories = ["USA", "China", "Europe", "Others"]
+
+    # elsif @genre == "soci"
+      # @categories = ["原発", "中国・台湾", "税金", "大阪"]gories = ["USA", "China", "Europe", "Others"]
+      # render "Unknown category: " + @genre
+    else
+      @categories = ["USA", "China", "Europe", "Others"]
+    end#if @genre == "soci"
+    
+    #=====================
+    # 2. Get docs
+    #=====================
+    # Get doc
+    docs = get_docs(5)
+
+    #=====================
+    # 3. Get a_tags
+    #=====================
+    a_tags = get_atags(docs)
+    
+    
+    # Categorize
+    # a_tags_categorized = categorize_atags(a_tags)
+    # a_tags_categorized = categorize_overseas_try17(a_tags)
+    a_tags_categorized = categorize_try17(a_tags)
+    
+    # Return
+    # return a_tags
+    return a_tags_categorized
+    
+    #debug
+#    return meta_tags
+    
+#    
+    # return docs
+    # return docs_new
+    
+  end#def try_nokogiri_17
 
 end#class ArticlesController < ApplicationController
 
