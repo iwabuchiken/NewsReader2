@@ -945,6 +945,146 @@ class ArticlesController < ApplicationController
     return [cat_usa, cat_china, cat_europe, cat_others]    
   end#def categorize_try17_others(a_tags)
 
+  def categorize_try17_bus(a_tags)
+    #######################
+    # Steps
+    # 1. Categories
+    # 2. Key words
+    # 3. Array of arrays
+    # 4. a_tags_categorized
+    # 5. Categorize
+    # 6. Return
+    #######################
+    
+    #######################
+    # 1. Categories
+    #######################
+    cat_usa = []; cat_china_taiwan = []; cat_europe = []
+    cat_tax = []; cat_nuc_plants = []; cat_enterprises = [];
+    cat_economy = []; cat_others = []
+    
+    # #
+    # cats = [cat_usa, cat_china_taiwan, cat_europe,
+            # cat_tax, cat_nuc_plants, cat_enterprises,
+            # cat_economy, cat_others]
+    
+    #######################
+    # 2. Key words
+    #######################
+    #
+    kw_usa = [
+            # Country
+            "アメリカ", "米国", "米",
+            
+            # Cities
+            "ニューヨーク",
+            
+            ] 
+    #kw_nuc_plants = ["原発", "原子力", "原子力発電所"]
+    # kw_usa = [u"アメリカ", u"米国", u"米"]gs.each do |a_tag|
+    
+    kw_china_taiwan = ["中国", "台湾"]
+    
+    kw_europe = [
+            # Countries
+            "フランス", "ドイツ", "イギリス", "ギリシャ", "ロシア", "イタリア",
+            "スペイン", "ポルトガル", "キプロス",
+            "独", "仏", "英", "伊", "露",
+            
+            # Cities
+            "ベルリン", "パリ", "ロンドン", "モスクワ",
+            
+            # Regions
+            "欧", "欧州", "ヨーロッパ", "EU", "ユーロ", "西欧", "東欧", "北欧" 
+            ]
+    
+    kw_tax = ["税", "税金", "消費税", "脱税"]
+    
+    kw_nuc_plants = ["原発", "原子力", "原子力発電所", "東電", "東京電力", "関電"]
+    
+    kw_enterprises = [
+                  "企業", "会社",
+                  
+                  # Companies
+                  "ソニー", "パナ", "パナソニック", "シャープ", "日興證券", 
+                  "日興", "東レ",
+                  
+                  # Others
+                  "社内", "社外",
+                  ]
+    
+    kw_economy = [
+                # Macro
+                "経済", "景気", "所得", "国民",
+                
+                # Industries
+                "エネルギー", "石油", "再生",
+                ]
+    
+    
+    #######################
+    # 3. Array of arrays
+    #######################
+    # Key words
+    kws = [kw_usa, kw_china_taiwan, kw_europe,
+            kw_tax, kw_nuc_plants, kw_enterprises, kw_economy]
+            
+    # Categories
+        #
+    cats = [cat_usa, cat_china_taiwan, cat_europe,
+            cat_tax, cat_nuc_plants, cat_enterprises,
+            cat_economy, cat_others]
+
+    #######################
+    # 4. a_tags_categorized
+    #######################
+    a_tags_categorized = []
+    
+
+    #######################
+    # 5. Categorize
+    #######################
+    #
+    a_tags.each do |a_tag|
+      # Flag
+      is_in = false
+
+      #
+      kws.length.times do |i|
+        #
+        kws[i].each do |word|
+          #
+          if a_tag.content.include?(word)
+            cats[i].push(a_tag)
+            
+            #
+            is_in = true
+            
+            break
+          
+          end#if a_tag.content.include?(word)
+          
+        end#kws[i].each do |word|
+        
+      end#kws.length.times do |i|
+
+      if is_in == false
+        cat_others.push(a_tag)
+      end#if is_in == false
+      
+    end#a_tags.each do |a_tag|
+    
+    #######################
+    # 6. Return
+    #######################
+    return cats
+    
+    # return [cat_nuc_plants, cat_china_taiwan, 
+              # cat_tax, cat_osaka, cat_enterprises, 
+              # cat_incidents,cat_others]
+
+  end#def categorize_try17_bus(a_tags)
+
   def categorize_try17_society(a_tags)
     #######################
     # Steps
@@ -1274,6 +1414,8 @@ class ArticlesController < ApplicationController
       a_tags_categorized = categorize_try17_overseas(a_tags)
     elsif @genre == "soci"
       a_tags_categorized = categorize_try17_society(a_tags)
+    elsif @genre == "bus_all"
+      a_tags_categorized = categorize_try17_bus(a_tags)
     else
       a_tags_categorized = categorize_try17_others(a_tags)
     end
@@ -1309,8 +1451,10 @@ class ArticlesController < ApplicationController
               ["USA", "China", "Europe", "Korea",
                     "Middle East", "India", "Others"]
     elsif @genre == "bus_all"
-        @categories = ["USA", "China", "Europe", "Others"]
-
+        @categories = ["USA", "China", "Europe", "Tax",
+                        "Nuc plants", "Enterprises", "Economy", "Others"]
+# kws = [kw_usa, kw_china_taiwan, kw_europe,
+            # kw_tax, kw_nuc_plants, kw_enterprises, kw_economy]
     # elsif @genre == "soci"
       # @categories = ["原発", "中国・台湾", "税金", "大阪"]gories = ["USA", "China", "Europe", "Others"]
       # render "Unknown category: " + @genre
