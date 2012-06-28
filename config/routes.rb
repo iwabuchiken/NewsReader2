@@ -1,4 +1,8 @@
 NewsReader2::Application.routes.draw do
+  resources :categories
+
+  resources :genres
+
   # root
   root :to => "articles#index"
 

@@ -74,6 +74,16 @@ r s
 []---------------------------
 heroku run rake db:migrate
 
+[20120629_064952]---------------------------
+rails generate scaffold Genre name:string
+bundle exec rake db:migrate
 
+rails destroy scaffold Genre
+
+rails generate scaffold Genre name:string
+bundle exec rake db:migrate
+
+rails generate scaffold Category name:string genre_id:integer
+bundle exec rake db:migrate
 
 ============EOF============
