@@ -4,6 +4,6 @@ class Category < ActiveRecord::Base
   #==========================
   #
   belongs_to :genre
-  
+  has_many :subcat  
 
 end#class Category

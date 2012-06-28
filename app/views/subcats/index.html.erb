@@ -1,0 +1,27 @@
+<h1>Listing subcats</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Category</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @subcats.each do |subcat| %>
+  <tr>
+    <td><%= subcat.name %></td>
+    <td><%= subcat.category_id %></td>
+    <td><%= link_to 'Show', subcat %></td>
+    <td><%= link_to 'Edit', edit_subcat_path(subcat) %></td>
+    <td><%= link_to 'Destroy', subcat, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Subcat', new_subcat_path %>&nbsp;|&nbsp;
+<%= link_to 'Categories list', categories_path %>&nbsp;|&nbsp;
+<%= link_to 'Genres list', genres_path %>

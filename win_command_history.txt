@@ -86,4 +86,7 @@ bundle exec rake db:migrate
 rails generate scaffold Category name:string genre_id:integer
 bundle exec rake db:migrate
 
+rails generate scaffold Subcat name:string category_id:integer
+bundle exec rake db:migrate
+
 ============EOF============

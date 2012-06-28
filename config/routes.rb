@@ -1,4 +1,6 @@
 NewsReader2::Application.routes.draw do
+  resources :subcats
+
   resources :categories
 
   resources :genres

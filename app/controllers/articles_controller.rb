@@ -1447,9 +1447,18 @@ class ArticlesController < ApplicationController
 
     elsif @genre == "int"
         # @categories = ["USA", "China", "Europe", "Others"]
-        @categories = \
-              ["USA", "China", "Europe", "Korea",
-                    "Middle East", "India", "Others"]
+        # @categories = \
+              # ["USA", "China", "Europe", "Korea",
+                    # "Middle East", "India", "Others"]
+                    
+        @categories = []
+        
+        @cats = Category.find_all_by_genre_id(2)
+        
+        @cats.each do |cat|
+          @categories.push(cat.name)
+        end
+        
     elsif @genre == "bus_all"
         @categories = ["USA", "China", "Europe", "Tax",
                         "Nuc plants", "Enterprises", "Economy", "Others"]

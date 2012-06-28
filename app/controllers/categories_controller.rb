@@ -30,8 +30,18 @@ class CategoriesController < ApplicationController
   def new
     @category = Category.new
     
+    @genres = Genre.all
     
+    @genre_names = []
+    
+    @genres.each do |item|
+      @genre_names.push(item.name)
+    end
 
+    # reset_id
+    
+    @cats = Category.find_all_by_genre_id(2)
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @category }
@@ -86,4 +96,24 @@ class CategoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private #==========================================
+  #-------------------------------
+  # reset_id
+  # 1. Delete all records and rest the auto-increment number  
+  #-------------------------------
+  def reset_id
+    ActiveRecord::Base.connection.execute(\
+          #'ALTER TABLE category AUTO_INCREMENT = 1')
+          # "DELETE FROM sqlite_sequence WHERE NAME = 'cate'")
+          # "DELETE FROM sqlite_sequence WHERE NAME = 'categories'")
+          "DELETE FROM categories; DELETE FROM sqlite_sequence WHERE NAME = 'categories'")
+    
+    #
+    # @adapter = ActiveRecord::Base.connection.adapter_name
+#     
+    # @key = maximum(primary_key)
+
+  end#def reset_id
+
 end

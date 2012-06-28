@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @subcat.name %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @subcat.category_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_subcat_path(@subcat) %> |
+<%= link_to 'Back', subcats_path %>

@@ -17,9 +17,28 @@
   </div>
   <div class="field">
     <%= f.label :genre_id %><br />
-    <%= f.number_field :genre_id %>
+		<!-- Ref => http://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-select     -->
+    <%= select("category", "genre_id", 
+    			Genre.all.collect {|g| [g.name, g.id]}, 
+    			{:include_blank => true}) %>
+    <%#= f.number_field :genre_id %>
   </div>
+  
+  
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<!-- @cats => <%#= @cats %>(<%#=@cats.size.to_s %>) -->
+
+<%#= @adapter %>
+
+<!--   <div class="field"> -->
+    <%#= f.label :genre_id %><br />
+    <%#= f.number_field :genre_id %>
+<!--   </div> -->
+
+<%#= f.collection_select :genre_id, @genre_names, :to_s, :to_s, :include_blank => true %>
+<%#= f.select :name, @genres, :selected => params[:id] %>
+<%#= select("post", "genre_id", Genre.all.collect {|g| [g.name, g.id]}, {:include_blank => true}) %>
