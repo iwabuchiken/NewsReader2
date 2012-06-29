@@ -95,4 +95,6 @@ heroku run rake db:migrate
 rails generate scaffold Keyword words:string genre_id:integer category_id:integer subcat_id:integer
 bundle exec rake db:migrate
 
+heroku run rake db:migrate
+
 ============EOF============
