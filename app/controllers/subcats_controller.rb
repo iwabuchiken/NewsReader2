@@ -1,4 +1,7 @@
 class SubcatsController < ApplicationController
+  # Layout
+  layout "admin"
+
   # GET /subcats
   # GET /subcats.json
   def index

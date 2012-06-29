@@ -1,4 +1,7 @@
 class GenresController < ApplicationController
+  # Layout
+  layout "admin"
+  
   # GET /genres
   # GET /genres.json
   def index

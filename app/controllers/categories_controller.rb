@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+  # Layout
+  layout "admin"
+
   #==========================
   # Methods
   #==========================
