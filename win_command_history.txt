@@ -89,4 +89,10 @@ bundle exec rake db:migrate
 rails generate scaffold Subcat name:string category_id:integer
 bundle exec rake db:migrate
 
+heroku run rake db:migrate
+
+[20120630_065521]---------------------------
+rails generate scaffold Keyword words:string genre_id:integer category_id:integer subcat_id:integer
+bundle exec rake db:migrate
+
 ============EOF============

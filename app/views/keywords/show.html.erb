@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Words:</b>
+  <%= @keyword.words %>
+</p>
+
+<p>
+  <b>Genre:</b>
+  <%= @keyword.genre_id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @keyword.category_id %>
+</p>
+
+<p>
+  <b>Subcat:</b>
+  <%= @keyword.subcat_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_keyword_path(@keyword) %> |
+<%= link_to 'Back', keywords_path %>
