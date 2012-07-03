@@ -1,8 +1,15 @@
+# coding: utf-8
+
 class KeywordsController < ApplicationController
   # GET /keywords
   # GET /keywords.json
   def index
     @keywords = Keyword.all
+
+    # @new_kw = Keyword.new
+#     
+    # @new_kw.words = "米国　米　アメリカ"
+    # @new_kw.save
 
     respond_to do |format|
       format.html # index.html.erb

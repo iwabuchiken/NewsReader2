@@ -33,38 +33,77 @@
 
 </div>
 
-<hr/>
-	<% @categories.each do |category| %>
-		<a href="#<%= category%>"><%= category %></a> | 
-	<% end %>
-
-<% @categories.length.times do |i| %>
+<% if @genre != "int" %> <!-- soci, bus_all --------------------->
 	<hr/>
-	<div id="<%= @categories[i] %>" class="category" >
-		<strong><%= @categories[i] %></strong> (<%= @objects[i].size %> 
-		<% if @objects[i].size < 2 %>
-			item
-		<% else %>
-			items
+		<% @categories.each do |category| %>
+			<a href="#<%= category%>"><%= category %></a> | 
 		<% end %>
-		) 
-			   &nbsp;&nbsp;<a href="#top">To Top</a>
-	</div>
-	<hr/>
-
-	<% @i = 1 %>
-	<% @objects[i].each do |item| %>
-		<%#= raw item.to_html %>
-		<%# item.each do |article| %>
-			<div style="line-height: 250%;">
-				<%#= raw item[0] %>
-				<%#= raw article %>
-				<%= @i %>. <%= raw item %><br/>
-				<% @i += 1 %>
-				<%#= item.content %>
-			</div>
-		<%# end %>
+	
+	<% @categories.length.times do |i| %>
+		<hr/>
+		<div id="<%= @categories[i] %>" class="category" >
+			<strong><%= @categories[i] %></strong> (<%= @objects[i].size %> 
+			<% if @objects[i].size < 2 %>
+				item
+			<% else %>
+				items
+			<% end %>
+			) 
+				   &nbsp;&nbsp;<a href="#top">To Top</a>
+		</div>
+		<hr/>
+	
+		<% @i = 1 %>
+		<% @objects[i].each do |item| %>
+			<%#= raw item.to_html %>
+			<%# item.each do |article| %>
+				<div style="line-height: 250%;">
+					<%#= raw item[0] %>
+					<%#= raw article %>
+					<%= @i %>. <%= raw item %><br/>
+					<% @i += 1 %>
+					<%#= item.content %>
+				</div>
+			<%# end %>
+		<% end %>
+		<br/>
+	
 	<% end %>
-	<br/>
 
-<% end %>
+<% else %> <!-- int --------------------------->
+
+	<hr/>
+		<% @categories.each do |category| %>
+			<a href="#<%= category%>"><%= category %></a> | 
+		<% end %>
+	
+	<% @categories.length.times do |i| %>
+		<!-- Category list -->
+		<hr/>
+		<div id="<%= @categories[i] %>" class="category" >
+			<strong><%= @categories[i] %></strong> (<%= @objects[i].size %> 
+			<% if @objects[i].size < 2 %>
+				item
+			<% else %>
+				items
+			<% end %>
+			) 
+				   &nbsp;&nbsp;<a href="#top">To Top</a>
+		</div>
+		<hr/>
+	
+		<% @objects[i].each do |subcat| %>
+			<% subcat.length do |j| %>
+				<% @i = 1 %>
+					<div style="line-height: 250%;">
+						<%= @i %>. <%= raw @objects[i][j] %><br/>
+						<% @i += 1 %>
+					</div>
+				<%# end %>
+			<% end %>
+		<% end %> <!-- @objects[i].each do |item| -->
+		<br/>
+	
+	<% end %>
+
+<% end %>  <!-- ---------------- -->

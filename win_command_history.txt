@@ -4,7 +4,7 @@ gitk
 
 a
 cd C:\WORKS\WORKSPACES_APTANA\NewsReader2
-r s
+rails s --port 3000
 
 [Set up 20120529_173711]----------------------------
 rails new NewsReader
