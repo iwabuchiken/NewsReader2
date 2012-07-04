@@ -38,50 +38,33 @@
 		<% end %>
 	<hr /><br />
 	
-	<% @objects.each_with_index do |category, i| %>
-	
-		<%= @categories[i] %> => <%= category.size %><br />
-		category => <%= category.class %><br />
-		
-		<% category.each_with_index do |subcategory, j| %>
-			
-			<!-- Subcategory labels -->
-			<% @subcategories[j].each do |subcat_label| %>
-				<%= subcat_label %>&nbsp; | &nbsp; 
-			<% end %>
-			<br />
-			
-				
-			<%= @categories[i] + "/" + j.to_s %> => <%= subcategory.size %><br />
-			subcategory => <%= subcategory.class %><br />
-			
-			<% subcategory.each do |item| %>
-				<%#= item.class %> <!-- => Nokogiri::XML::Element  -->
-				<%#= item.text() %>
-				<%#= item['href'].class %>
-				<%#= item.content().class %> <!-- => undefined method `content' for []:Array -->
-				<%#= item[0] %> <!-- => [] -->
-				<%#= item %> <!-- => incompatible character encodings: UTF-8 and EUC-JP -->
-				<%#= item.class %> <!-- => Nokogiri::XML::Element  -->
-				<%#= item.content %> <!-- => 中国　北京市トップ、胡錦濤派　党委書記に -->
-				<%#= item %> <!-- => incompatible character encodings: UTF-8 and EUC-JP -->
-				<%#= raw item %> <!-- => incompatible character encodings: UTF-8 and EUC-JP -->
-				<%#= item.content %> <!-- => 中国　北京市トップ、胡錦濤派　党委書記に -->
-				<%#= item['href'] %><br /><br />
-				<%= link_to item.content, item['href'], {:target => "_blank"} %><br />
-			<% end %><%# subcategory.each do |item| %>
-			
-		<% end %><%# @objects.each_with_index do |category, i| %>
-		<br/><br/>
-		
-	<% end %><%# @objects.each_with_index do |category, i| %>
 
-	<hr/><br/>
-	
-	@objects => <%= @objects.class %><br />
-	@objects[0].class => <%= @objects[0].class %><br />
-	@objects[0][0].class => <%= @objects[0][0].class %><br />
-	
-	@objects[0][0][0].class => <%= @objects[0][0][0].class %><br />
-	@objects[0][0][1].class => <%= @objects[0][0][1].class %><br />
+@objects.class => <%= @objects.class %> <!-- => Array --><br />
+@objects.size => <%= @objects.size %><br />
+@objects[0].class => <%= @objects[0].class %><br /> <!-- => Array -->
+@objects[0].size => <%= @objects[0].size %><br /> <!-- => 2 -->
+<br />
+@objects[0][0].class => <%= @objects[0][0].class %><br /> 
+@objects[0][0].size => <%#= @objects[0][0].size %><br />
+@objects[0][0] => <%#= @objects[0][0] %><br />
+@objects[0][1].class => <%#= @objects[0][1].class %><br /> 
+@objects[0][1].size => <%#= @objects[0][1].size %><br />
+@objects[0][1] => <%#= @objects[0][1] %><br />
+<br />
+@objects[0] => <%#= @objects[0] %>
+<br /><br />
 
+@cat_usa => <%#= @cat_usa %><br/>
+@cat_usa.size => <%#= @cat_usa.size %><br />
+@cat_usa[0] => <%#= @cat_usa[0] %><br />
+@cat_usa[0].class => <%#= @cat_usa[0].class %><br />
+
+<%#= @cat_usa[0].content %>
+@cat_usa[0].content.encode('euc-jp') => <%#= @cat_usa[0].content.encode('euc-jp') %><br />
+<%#= @cat_usa[0].content.include?("米国") %><br />
+
+<br /><br/>
+
+@cat_usa[0].size => <%= @cat_usa[0].size %><br />
+@cat_usa[0] => <%= @cat_usa[0] %><br />
+@cat_usa => <%= @cat_usa %><br />

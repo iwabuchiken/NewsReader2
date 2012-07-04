@@ -6,6 +6,8 @@ a
 cd C:\WORKS\WORKSPACES_APTANA\NewsReader2
 rails s --port 3000
 
+C:\WORKS\PROGRAMS\FreeMind\Freemind.exe C:\WORKS\WORKSPACES_APTANA\NewsReader2\NewsReader2.mm
+
 [Set up 20120529_173711]----------------------------
 rails new NewsReader
 

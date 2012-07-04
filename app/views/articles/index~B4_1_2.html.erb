@@ -1,0 +1,87 @@
+<h1 class="title" id="top">
+	<% if @genre == "soci" %>
+		Society
+	<% elsif @genre == "int" %>
+		Overseas
+	<% elsif @genre == "bus_all" %>
+		Economy
+	<% else %>
+		Society
+	<% end %>
+</h1>
+<br/>
+
+<br/>
+<div>
+	<%= link_to 'Society', 
+			:controller => "articles", 
+			:action => "index", 
+			:genre => "soci" %> |
+	<%= link_to 'Econ', 
+			:controller => "articles", 
+			:action => "index", 
+			:genre => "bus_all" %> | 
+	<%= link_to 'Overseas', 
+			:controller => "articles", 
+			:action => "index", 
+			:genre => "int" %>&nbsp;&nbsp;|&nbsp;
+	<%= link_to 'Admin', 
+			:controller => "genres", 
+			:action => "index"
+			%>
+
+</div>
+	<!-- 	Categories -->
+	<hr/>
+		<% @categories.each do |category| %>
+			<a href="#<%= category%>"><%= category %></a> | 
+		<% end %>
+	<hr /><br />
+	
+	<% @objects.each_with_index do |category, i| %>
+	
+		<%= @categories[i] %> => <%= category.size %><br />
+		category => <%= category.class %><br />
+		
+		<% category.each_with_index do |subcategory, j| %>
+			
+			<!-- Subcategory labels -->
+			<% @subcategories[j].each do |subcat_label| %>
+				<%= subcat_label %>&nbsp; | &nbsp; 
+			<% end %>
+			<br />
+			
+				
+			<%= @categories[i] + "/" + j.to_s %> => <%= subcategory.size %><br />
+			subcategory => <%= subcategory.class %><br />
+			
+			<% subcategory.each do |item| %>
+				<%#= item.class %> <!-- => Nokogiri::XML::Element  -->
+				<%#= item.text() %>
+				<%#= item['href'].class %>
+				<%#= item.content().class %> <!-- => undefined method `content' for []:Array -->
+				<%#= item[0] %> <!-- => [] -->
+				<%#= item %> <!-- => incompatible character encodings: UTF-8 and EUC-JP -->
+				<%#= item.class %> <!-- => Nokogiri::XML::Element  -->
+				<%#= item.content %> <!-- => 中国　北京市トップ、胡錦濤派　党委書記に -->
+				<%#= item %> <!-- => incompatible character encodings: UTF-8 and EUC-JP -->
+				<%#= raw item %> <!-- => incompatible character encodings: UTF-8 and EUC-JP -->
+				<%#= item.content %> <!-- => 中国　北京市トップ、胡錦濤派　党委書記に -->
+				<%#= item['href'] %><br /><br />
+				<%= link_to item.content, item['href'], {:target => "_blank"} %><br />
+			<% end %><%# subcategory.each do |item| %>
+			
+		<% end %><%# @objects.each_with_index do |category, i| %>
+		<br/><br/>
+		
+	<% end %><%# @objects.each_with_index do |category, i| %>
+
+	<hr/><br/>
+	
+	@objects => <%= @objects.class %><br />
+	@objects[0].class => <%= @objects[0].class %><br />
+	@objects[0][0].class => <%= @objects[0][0].class %><br />
+	
+	@objects[0][0][0].class => <%= @objects[0][0][0].class %><br />
+	@objects[0][0][1].class => <%= @objects[0][0][1].class %><br />
+
