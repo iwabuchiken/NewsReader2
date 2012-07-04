@@ -9,7 +9,6 @@
 		Society
 	<% end %>
 </h1>
-<%= @testword %>
 <br/>
 
 <br/>
@@ -32,78 +31,57 @@
 			%>
 
 </div>
-
-<% if @genre != "int" %> <!-- soci, bus_all --------------------->
+	<!-- 	Categories -->
 	<hr/>
 		<% @categories.each do |category| %>
 			<a href="#<%= category%>"><%= category %></a> | 
 		<% end %>
+	<hr /><br />
 	
-	<% @categories.length.times do |i| %>
-		<hr/>
-		<div id="<%= @categories[i] %>" class="category" >
-			<strong><%= @categories[i] %></strong> (<%= @objects[i].size %> 
-			<% if @objects[i].size < 2 %>
-				item
-			<% else %>
-				items
+	<% @objects.each_with_index do |category, i| %>
+	
+		<%= @categories[i] %> => <%= category.size %><br />
+		category => <%= category.class %><br />
+		
+		<% category.each_with_index do |subcategory, j| %>
+			
+			<!-- Subcategory labels -->
+			<% @subcategories[j].each do |subcat_label| %>
+				<%= subcat_label %>&nbsp; | &nbsp; 
 			<% end %>
-			) 
-				   &nbsp;&nbsp;<a href="#top">To Top</a>
-		</div>
-		<hr/>
-	
-		<% @i = 1 %>
-		<% @objects[i].each do |item| %>
-			<%#= raw item.to_html %>
-			<%# item.each do |article| %>
-				<div style="line-height: 250%;">
-					<%#= raw item[0] %>
-					<%#= raw article %>
-					<%= @i %>. <%= raw item %><br/>
-					<% @i += 1 %>
-					<%#= item.content %>
-				</div>
-			<%# end %>
-		<% end %>
-		<br/>
-	
-	<% end %>
+			<br />
+			
+				
+			<%= @categories[i] + "/" + j.to_s %> => <%= subcategory.size %><br />
+			subcategory => <%= subcategory.class %><br />
+			
+			<% subcategory.each do |item| %>
+				<%#= item.class %> <!-- => Nokogiri::XML::Element  -->
+				<%#= item.text() %>
+				<%#= item['href'].class %>
+				<%#= item.content().class %> <!-- => undefined method `content' for []:Array -->
+				<%#= item[0] %> <!-- => [] -->
+				<%#= item %> <!-- => incompatible character encodings: UTF-8 and EUC-JP -->
+				<%#= item.class %> <!-- => Nokogiri::XML::Element  -->
+				<%#= item.content %> <!-- => 中国　北京市トップ、胡錦濤派　党委書記に -->
+				<%#= item %> <!-- => incompatible character encodings: UTF-8 and EUC-JP -->
+				<%#= raw item %> <!-- => incompatible character encodings: UTF-8 and EUC-JP -->
+				<%#= item.content %> <!-- => 中国　北京市トップ、胡錦濤派　党委書記に -->
+				<%#= item['href'] %><br /><br />
+				<%= link_to item.content, item['href'], {:target => "_blank"} %><br />
+			<% end %><%# subcategory.each do |item| %>
+			
+		<% end %><%# @objects.each_with_index do |category, i| %>
+		<br/><br/>
+		
+	<% end %><%# @objects.each_with_index do |category, i| %>
 
-<% else %> <!-- int --------------------------->
+	<hr/><br/>
+	
+	@objects => <%= @objects.class %><br />
+	@objects[0].class => <%= @objects[0].class %><br />
+	@objects[0][0].class => <%= @objects[0][0].class %><br />
+	
+	@objects[0][0][0].class => <%= @objects[0][0][0].class %><br />
+	@objects[0][0][1].class => <%= @objects[0][0][1].class %><br />
 
-	<hr/>
-		<% @categories.each do |category| %>
-			<a href="#<%= category%>"><%= category %></a> | 
-		<% end %>
-	
-	<% @categories.length.times do |i| %>
-		<!-- Category list -->
-		<hr/>
-		<div id="<%= @categories[i] %>" class="category" >
-			<strong><%= @categories[i] %></strong> (<%= @objects[i].size %> 
-			<% if @objects[i].size < 2 %>
-				item
-			<% else %>
-				items
-			<% end %>
-			) 
-				   &nbsp;&nbsp;<a href="#top">To Top</a>
-		</div>
-		<hr/>
-	
-		<% @objects[i].each do |subcat| %>
-			<% subcat.length do |j| %>
-				<% @i = 1 %>
-					<div style="line-height: 250%;">
-						<%= @i %>. <%= raw @objects[i][j] %><br/>
-						<% @i += 1 %>
-					</div>
-				<%# end %>
-			<% end %>
-		<% end %> <!-- @objects[i].each do |item| -->
-		<br/>
-	
-	<% end %>
-
-<% end %>  <!-- ---------------- -->
