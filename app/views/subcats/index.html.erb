@@ -12,7 +12,7 @@
 <% @subcats.each do |subcat| %>
   <tr>
     <td><%= subcat.name %></td>
-    <td><%= subcat.category_id %></td>
+    <td><%= subcat.category.name %>(id=<%= subcat.category.id %>)</td>
     <td><%= link_to 'Show', subcat %></td>
     <td><%= link_to 'Edit', edit_subcat_path(subcat) %></td>
     <td><%= link_to 'Destroy', subcat, confirm: 'Are you sure?', method: :delete %></td>

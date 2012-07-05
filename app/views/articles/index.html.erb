@@ -38,33 +38,25 @@
 		<% end %>
 	<hr /><br />
 	
-
-@objects.class => <%= @objects.class %> <!-- => Array --><br />
-@objects.size => <%= @objects.size %><br />
-@objects[0].class => <%= @objects[0].class %><br /> <!-- => Array -->
-@objects[0].size => <%= @objects[0].size %><br /> <!-- => 2 -->
-<br />
-@objects[0][0].class => <%= @objects[0][0].class %><br /> 
-@objects[0][0].size => <%#= @objects[0][0].size %><br />
-@objects[0][0] => <%#= @objects[0][0] %><br />
-@objects[0][1].class => <%#= @objects[0][1].class %><br /> 
-@objects[0][1].size => <%#= @objects[0][1].size %><br />
-@objects[0][1] => <%#= @objects[0][1] %><br />
-<br />
-@objects[0] => <%#= @objects[0] %>
-<br /><br />
-
-@cat_usa => <%#= @cat_usa %><br/>
-@cat_usa.size => <%#= @cat_usa.size %><br />
-@cat_usa[0] => <%#= @cat_usa[0] %><br />
-@cat_usa[0].class => <%#= @cat_usa[0].class %><br />
-
-<%#= @cat_usa[0].content %>
-@cat_usa[0].content.encode('euc-jp') => <%#= @cat_usa[0].content.encode('euc-jp') %><br />
-<%#= @cat_usa[0].content.include?("米国") %><br />
-
-<br /><br/>
-
-@cat_usa[0].size => <%= @cat_usa[0].size %><br />
-@cat_usa[0] => <%= @cat_usa[0] %><br />
-@cat_usa => <%= @cat_usa %><br />
+	<!-- Subcategories -->
+	<% @subcat_usa.each_with_index do |subcat, i| %>
+		<span id="<%= subcat %>" class="subcat" >
+			<strong><%= subcat %></strong> (<%= @objects[0][i].size %> 
+			) 
+				   
+		</span>
+		
+	<% end %>
+	&nbsp;&nbsp;<a href="#top">To Top</a><br />
+	
+	<!-- Articles -->
+	<% @subcat_usa.each_with_index do |subcat, i| %>
+		&lt;<%= subcat %>(<%= @objects[0][i].size %>)&gt;
+		
+		<br />
+		<% @objects[0][i].each do |item| %>
+<!-- 			<%#= raw item %><br /> -->
+			<%= link_to item.content, item['href'] %><br/>
+		<% end %>
+	<% end %>
+	

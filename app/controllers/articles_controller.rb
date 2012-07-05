@@ -11,7 +11,10 @@ class ArticlesController < ApplicationController
     
   def index
     #=================================
-    @objects = try_19    # B4.1.2
+    @objects = try_20    # B4.1.4
+
+    #=================================
+    # @objects = try_19    # B4.1.2
 
     #=================================
     # @objects = try_18    # B4
@@ -1934,6 +1937,185 @@ class ArticlesController < ApplicationController
     return a_tags_categorized
     
   end#def try_19
+
+  # ============ try 20 ========================
+  def try20_categorize_overseas(a_tags)
+    #------------------------------
+    # Steps
+    # 1. Categories
+    # 2. Subcategories
+    # 3. Keywords
+    # 4. Categorize => by categories
+    # 5. Categorize => by subcategories
+    # 6. cat_XXX => Replace with subcategory objects
+    # 7. Return
+    #------------------------------
+    
+    #------------------------------
+    # 1. Categories
+    #------------------------------
+    @cat_usa = []
+    cat_others = []
+    
+    #------------------------------
+    # 2. Subcategories
+    #------------------------------
+    @subcategories = ["econ", "others"]
+    
+    # USA
+    cat_usa_econ = []
+    cat_usa_others = []
+    
+    #------------------------------
+    # 3. Keywords
+    #------------------------------
+    # KW for Categories
+    kw_usa = ["アメリカ", "米国", "米"] 
+
+    # KW for Subcategories
+    # USA
+    kw_usa_econ = ["米軍", "景気", "景況", "企業", "経済", "貿易"]  #kw_china_econ = ["経済", "鉄道", "工場"]
+    
+    #------------------------------
+    # 4. Categorize => by categories
+    #------------------------------
+    # Categorized tags 
+    a_tags_categorized = []
+#
+    a_tags.each do |a_tag|
+      #=============================
+      # 1. USA
+      # 0. Others
+      #=============================
+      # Flag
+      is_in = false
+      
+      #=============================
+      # 1. USA
+      #=============================
+      #
+      kw_usa.each do |word|
+        # Jusge
+        if a_tag.content.include?(word)
+          @cat_usa.push(a_tag)
+          
+          # Change flag
+          is_in = true
+          break
+          
+        end#if a_tag.content.include?(word)
+          
+      end#kw_usa.each do |word|
+        # else
+
+      #===================
+      # Others
+      #===================
+      if is_in == false
+        cat_others.push(a_tag)
+      end#if is_in == false
+
+      
+      
+    end#a_tags.each do |a_tag|
+
+    #------------------------------
+    # 5. Categorize => by subcategories
+    #------------------------------
+    # USA -------------------------
+    @cat_usa.each do |item|
+      # Flag
+      is_in = false
+      
+      # Judge
+      kw_usa_econ.each do |word|
+        #
+        #if item.include?(word)
+        if item.content.include?(word)  #=> undefined method `content' for []:Array
+          cat_usa_econ.push(item)
+          
+          #
+          is_in = true
+          
+          break
+          
+        end#if a_tag.content.include?(word)
+        
+      end#kw_usa_econ.each do |kw|
+
+      # Others
+      if is_in == false
+        cat_usa_others.push(item)
+      end#if is_in == false
+            
+    end#cat_usa.each do |item|
+
+    #------------------------------
+    # 6. cat_XXX => Replace with subcategory objects
+    #------------------------------
+    # USA
+    @cat_usa = []
+    @cat_usa.push(cat_usa_econ)
+    @cat_usa.push(cat_usa_others)
+    
+    # Others
+    cat_others_temp = cat_others
+    cat_others = []
+    cat_others.push(cat_others_temp)
+    
+    #------------------------------
+    # 7. Return
+    #------------------------------
+#    return [cat_usa, cat_china, cat_others]
+    return [@cat_usa, cat_others]
+    
+  end#def try20_categorize_overseas(a_tags)
+  
+  def try_20
+    ###########################
+    # Steps
+    # 1. Get categories
+    # 2. Get docs
+    # 3. Get a_tags    
+    ###########################
+    
+    #=====================
+    # 1. Get categories
+    #=====================
+    # Param
+    @genre = params['genre']
+
+    @categories = []
+    
+    @cats = Category.find_all_by_genre_id(2)
+    
+    @cats.each do |cat|
+      @categories.push(cat.name)
+    end#@cats.each do |cat|
+
+    # Subcategories
+    @subcat_usa = ["Econ", "Others"]
+
+
+    #=====================
+    # 2. Get docs
+    #=====================
+    # Get doc
+    #docs = get_docs(5)
+    docs = get_docs(3)
+
+    #=====================
+    # 3. Get a_tags
+    #=====================
+    a_tags = get_atags(docs)
+    
+    # Categorize
+    a_tags_categorized = try20_categorize_overseas(a_tags)
+    
+    # Return
+    return a_tags_categorized
+    
+  end#def try_20
 
 end#class ArticlesController < ApplicationController
 

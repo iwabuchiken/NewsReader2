@@ -28,7 +28,9 @@ class SubcatsController < ApplicationController
   # GET /subcats/new.json
   def new
     @subcat = Subcat.new
-
+  
+    @categories = Category.all
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @subcat }
