@@ -3,7 +3,13 @@
 <%= render 'form' %>
 
 
-<%= link_to 'Back', categories_path %>
+<%= link_to 'Back', categories_path %>&nbsp;&nbsp;|
+
+<% if @category.genre_id != nil %>
+	<%= link_to 'Back to genre', @category.genre %>
+<% else %>
+	<%= link_to 'Back to genres list', genres_path %>
+<% end %>
 
 <hr />
 @category.genre_id => <%= @category.genre_id %><br />
