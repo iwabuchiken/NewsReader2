@@ -14,11 +14,23 @@
   <%= @genre.name %>
 </p>
 
-<% if @categories != nil %>
-	<%= @categories.length %>
-<% else %>
-	@categories => nil!
-<% end %>
+<p><b>Categories:</b><br />
+	<% if @categories.length != 0 %>
+		
+		<% @categories.each do |category| %>
+			<%= category.id %>. <%= link_to category.name, category %><br />
+		<% end %>
+		
+	<% else %>
+		@categories => nil!
+	<% end %>
+</p>
+
+<p>
+	<%#= link_to 'Add category', new_category_path, :genre_id => @genre.id %>
+	<%#= link_to 'Add category', new_category_path, :method => 'get', :genre_id => @genre.id %>
+	<%= link_to 'Add category', :controller => 'categories', :action => 'new', :genre_id => @genre.id %>
+</p>
 
 <br />
 

@@ -7,7 +7,7 @@
 
 <p>
   <b>Genre:</b>
-  <%= @category.genre_id %>
+  <%= link_to @category.genre.name, @category.genre %>&nbsp;(id=<%= @category.genre_id %>)
 </p>
 
 

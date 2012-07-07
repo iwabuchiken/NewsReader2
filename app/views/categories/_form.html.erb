@@ -18,9 +18,17 @@
   <div class="field">
     <%= f.label :genre_id %><br />
 		<!-- Ref => http://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-select     -->
-    <%= select("category", "genre_id", 
-    			Genre.all.collect {|g| [g.name, g.id]}, 
-    			{:include_blank => true}) %>
+    
+    <% if @category.genre_id != nil %>
+	    <%= select("category", "genre_id", 
+	    			Genre.all.collect {|g| [g.name, g.id]}, 
+	    			{:include_blank => true, :selected => @category.genre_id}) %>
+    <% else %>
+	    <%= select("category", "genre_id", 
+	    			Genre.all.collect {|g| [g.name, g.id]}, 
+	    			{:include_blank => true}) %>
+    <% end %>
+    
     <%#= f.number_field :genre_id %>
   </div>
   

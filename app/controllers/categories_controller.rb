@@ -33,17 +33,25 @@ class CategoriesController < ApplicationController
   def new
     @category = Category.new
     
-    @genres = Genre.all
+    # Get params
+    # @genre_id = params[':genre_id']
+    @genre_id = params[:genre_id]
     
-    @genre_names = []
-    
-    @genres.each do |item|
-      @genre_names.push(item.name)
+    if @genre_id != nil
+      @category.genre_id = @genre_id
     end
-
-    # reset_id
     
-    @cats = Category.find_all_by_genre_id(2)
+    # @genres = Genre.all
+#     
+    # @genre_names = []
+#     
+    # @genres.each do |item|
+      # @genre_names.push(item.name)
+    # end
+# 
+    # # reset_id
+#     
+    # @cats = Category.find_all_by_genre_id(2)
     
     respond_to do |format|
       format.html # new.html.erb
