@@ -7,11 +7,20 @@
   <%= @genre.id %>
 </p>
 
+<!-- doc => http://rails3try.blogspot.jp/2012/01/rails3-i18n.html -->
+
 <p>
   <b><%= t('Name')%>: </b>
   <%= @genre.name %>
 </p>
 
+<% if @categories != nil %>
+	<%= @categories.length %>
+<% else %>
+	@categories => nil!
+<% end %>
+
+<br />
 
 <%= link_to t('scaffold_labels.Edit'), edit_genre_path(@genre) %> |
 <%= link_to t('scaffold_labels.Back'), genres_path %>&nbsp;&nbsp;|&nbsp;
