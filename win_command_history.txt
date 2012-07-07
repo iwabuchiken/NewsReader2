@@ -101,4 +101,7 @@ bundle exec rake db:migrate
 
 heroku run rake db:migrate
 
+[20120707_135220]---------------------------
+#*bundle update
+
 ============EOF============

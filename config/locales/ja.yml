@@ -1,0 +1,30 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ja:
+  activerecord:
+    models:
+      genre: ジャンル
+    attributes:
+      genre:
+        name: ジャンル名
+
+
+# HTML strings ===============================
+  Name: 名前
+
+  category_label:
+      Genres: ジャンル
+      Categories: カテゴリー
+      Subcategories: サブカテゴリー
+      Keywords: キーワード
+      list: リスト
+  scaffold_labels:
+      Edit: 書き換え
+      Back: 戻る
+      Destroy: 廃棄
+
+  controller_new:
+      New: 新規
+      article: 記事
+      genre: ジャンル

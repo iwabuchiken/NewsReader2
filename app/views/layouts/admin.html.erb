@@ -19,10 +19,10 @@
 <%= yield %>
 
 <hr />
-<%= link_to_unless_current 'Genres list', genres_path %>&nbsp;|&nbsp;
-<%= link_to_unless_current 'Categories list', categories_path %>&nbsp;|&nbsp;
-<%= link_to_unless_current 'Subcategories list', subcats_path %>&nbsp;|&nbsp;
-<%= link_to_unless_current 'Keywords list', keywords_path %>
+<%= link_to_unless_current t('category_label.Genres'), genres_path %>&nbsp;|&nbsp;
+<%= link_to_unless_current t('category_label.Categories'), categories_path %>&nbsp;|&nbsp;
+<%= link_to_unless_current t('category_label.Subcategories'), subcats_path %>&nbsp;|&nbsp;
+<%= link_to_unless_current t('category_label.Keywords'), keywords_path %>
 <hr />
 
 <%= link_to 'Back to articles', articles_path %>
