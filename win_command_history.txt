@@ -2,9 +2,7 @@ a
 cd C:\WORKS\WORKSPACES_APTANA\NewsReader2
 a
 
-a
-cd C:\WORKS\WORKSPACES_APTANA\NewsReader2
-gitk
+rails s --port 3000
 
 a
 cd C:\WORKS\WORKSPACES_APTANA\NewsReader2

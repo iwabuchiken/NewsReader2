@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
 */
+
+.link_destroy {
+	color: red;
+}
+
