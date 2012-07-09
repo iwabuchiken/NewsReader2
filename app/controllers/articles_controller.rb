@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
     
   def index
     #=================================
-    @objects = try_20    # B4.1.4
+    # @objects = try_20    # B4.1.4
 
     #=================================
     # @objects = try_19    # B4.1.2
@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
     # @objects = try_18    # B4
 
     # #=================================
-    # @objects = try_nokogiri_17    # Categorize => "Society"
+    @objects = try_nokogiri_17    # Categorize => "Society"
     
     #=================================
     # @objects = try_nokogiri_16    # Modify link

@@ -1,0 +1,62 @@
+<h1 class="title" id="top">
+	<% if @genre == "soci" %>
+		Society
+	<% elsif @genre == "int" %>
+		Overseas
+	<% elsif @genre == "bus_all" %>
+		Economy
+	<% else %>
+		Society
+	<% end %>
+</h1>
+<br/>
+
+<br/>
+<div>
+	<%= link_to 'Society', 
+			:controller => "articles", 
+			:action => "index", 
+			:genre => "soci" %> |
+	<%= link_to 'Econ', 
+			:controller => "articles", 
+			:action => "index", 
+			:genre => "bus_all" %> | 
+	<%= link_to 'Overseas', 
+			:controller => "articles", 
+			:action => "index", 
+			:genre => "int" %>&nbsp;&nbsp;|&nbsp;
+	<%= link_to 'Admin', 
+			:controller => "genres", 
+			:action => "index"
+			%>
+
+</div>
+	<!-- 	Categories -->
+	<hr/>
+		<% @categories.each do |category| %>
+			<a href="#<%= category%>"><%= category %></a> | 
+		<% end %>
+	<hr /><br />
+	
+	<!-- Subcategories -->
+	<% @subcat_usa.each_with_index do |subcat, i| %>
+		<span id="<%= subcat %>" class="subcat" >
+			<strong><%= subcat %></strong> (<%= @objects[0][i].size %> 
+			) 
+				   
+		</span>
+		
+	<% end %>
+	&nbsp;&nbsp;<a href="#top">To Top</a><br />
+	
+	<!-- Articles -->
+	<% @subcat_usa.each_with_index do |subcat, i| %>
+		&lt;<%= subcat %>(<%= @objects[0][i].size %>)&gt;
+		
+		<br />
+		<% @objects[0][i].each do |item| %>
+<!-- 			<%#= raw item %><br /> -->
+			<%= link_to item.content, item['href'] %><br/>
+		<% end %>
+	<% end %>
+	

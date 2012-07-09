@@ -9,6 +9,7 @@
 		Society
 	<% end %>
 </h1>
+<%= @testword %>
 <br/>
 
 <br/>
@@ -31,32 +32,39 @@
 			%>
 
 </div>
-	<!-- 	Categories -->
+
+<hr/>
+	<% @categories.each do |category| %>
+		<a href="#<%= category%>"><%= category %></a> | 
+	<% end %>
+
+<% @categories.length.times do |i| %>
 	<hr/>
-		<% @categories.each do |category| %>
-			<a href="#<%= category%>"><%= category %></a> | 
+	<div id="<%= @categories[i] %>" class="category" >
+		<strong><%= @categories[i] %></strong> (<%= @objects[i].size %> 
+		<% if @objects[i].size < 2 %>
+			item
+		<% else %>
+			items
 		<% end %>
-	<hr /><br />
-	
-	<!-- Subcategories -->
-	<% @subcat_usa.each_with_index do |subcat, i| %>
-		<span id="<%= subcat %>" class="subcat" >
-			<strong><%= subcat %></strong> (<%= @objects[0][i].size %> 
-			) 
-				   
-		</span>
-		
+		) 
+			   &nbsp;&nbsp;<a href="#top">To Top</a>
+	</div>
+	<hr/>
+
+	<% @i = 1 %>
+	<% @objects[i].each do |item| %>
+		<%#= raw item.to_html %>
+		<%# item.each do |article| %>
+			<div style="line-height: 250%;">
+				<%#= raw item[0] %>
+				<%#= raw article %>
+				<%= @i %>. <%= raw item %><br/>
+				<% @i += 1 %>
+				<%#= item.content %>
+			</div>
+		<%# end %>
 	<% end %>
-	&nbsp;&nbsp;<a href="#top">To Top</a><br />
-	
-	<!-- Articles -->
-	<% @subcat_usa.each_with_index do |subcat, i| %>
-		&lt;<%= subcat %>(<%= @objects[0][i].size %>)&gt;
-		
-		<br />
-		<% @objects[0][i].each do |item| %>
-<!-- 			<%#= raw item %><br /> -->
-			<%= link_to item.content, item['href'] %><br/>
-		<% end %>
-	<% end %>
-	
+	<br/>
+
+<% end %>
