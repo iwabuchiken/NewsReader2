@@ -2,24 +2,20 @@
 
 <table>
   <tr>
+  	<th>Id</th>
     <th>Words</th>
     <th>Genre</th>
     <th>Category</th>
     <th>Subcat</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @keywords.each do |keyword| %>
   <tr>
-    <td><%= keyword.words %></td>
+  	<td class="column_center"><%= keyword.id %></td>
+    <td><%= link_to keyword.words, keyword %></td>
     <td><%= keyword.genre_id %></td>
     <td><%= keyword.category_id %></td>
     <td><%= keyword.subcat_id %></td>
-    <td><%= link_to 'Show', keyword %></td>
-    <td><%= link_to 'Edit', edit_keyword_path(keyword) %></td>
-    <td><%= link_to 'Destroy', keyword, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

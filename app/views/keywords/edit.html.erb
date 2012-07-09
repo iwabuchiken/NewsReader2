@@ -4,3 +4,18 @@
 
 <%= link_to 'Show', @keyword %> |
 <%= link_to 'Back', keywords_path %>
+
+<hr />
+<%#= form_tag '/keywords/ajax', :method => :get do -%>
+<%#= form_tag keywords_ajax_path, :method => :get do -%>
+<%#= form_tag :keywords_ajax, :method => :get do %>
+<%= form_tag '', :method => :get do %>
+	<%= submit_tag "Go ajax", :name => "send" %>
+<% end %><br />
+
+<br />
+<%= button_tag(:type => 'button', :id => 'send_button') do %>
+	<%= content_tag(:strong, 'Ajax!') %>
+<% end %>
+
+<div id="ajax_test"></div>

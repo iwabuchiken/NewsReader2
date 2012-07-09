@@ -5,7 +5,8 @@ class GenresController < ApplicationController
   # GET /genres
   # GET /genres.json
   def index
-    @genres = Genre.all
+    # doc => http://stackoverflow.com/questions/742700/rails-active-record-findall-order-issue
+    @genres = Genre.find(:all, :order => "name DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,7 +20,8 @@ class GenresController < ApplicationController
     @genre = Genre.find(params[:id])
     
     # Categories
-    @categories = @genre.category
+    # @categories = @genre.category
+    @categories = Category.find_all_by_genre_id(params[:id], :order => "name")
     
     respond_to do |format|
       format.html # show.html.erb

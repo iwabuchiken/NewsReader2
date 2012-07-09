@@ -22,4 +22,6 @@
 
 
 <%= link_to 'Edit', edit_keyword_path(@keyword) %> |
-<%= link_to 'Back', keywords_path %>
+<%= link_to 'Back to list', keywords_path %> |&nbsp;&nbsp;
+<%= link_to 'Destroy', @keyword, confirm: 'Are you sure?', method: :delete,
+				:style => "color: red;" %>

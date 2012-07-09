@@ -11,6 +11,11 @@ NewsReader2::Application.routes.draw do
   root :to => "articles#index"
 
   resources :articles
+  
+  #
+  # get "keywords/ajax" => "keywords#ajax", as: "keywords_ajax"
+  get "keywords_ajax" => "keywords#ajax", as: "keywords_ajax"
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

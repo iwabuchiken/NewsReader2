@@ -15,10 +15,19 @@
     <%= f.label :words %><br />
     <%= f.text_field :words %>
   </div>
+  
   <div class="field">
     <%= f.label :genre_id %><br />
-    <%= f.number_field :genre_id %>
+    <%#= f.number_field :genre_id %>
+
+    <%= select(
+    			"keyword", "genre_id", 
+    			Genre.all.collect {|g| [g.name, g.id]},
+    			{:include_blank => false, :selected => @keyword.genre_id}
+   		) %>
+   		
   </div>
+  
   <div class="field">
     <%= f.label :category_id %><br />
     <%= f.number_field :category_id %>
