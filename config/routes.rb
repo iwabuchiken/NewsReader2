@@ -14,7 +14,7 @@ NewsReader2::Application.routes.draw do
   
   #
   # get "keywords/ajax" => "keywords#ajax", as: "keywords_ajax"
-  get "keywords_ajax" => "keywords#ajax", as: "keywords_ajax"
+  # get "keywords_ajax" => "keywords#ajax", as: "keywords_ajax"
   
 
   # The priority is based upon order of creation:
