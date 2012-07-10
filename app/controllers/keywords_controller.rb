@@ -47,6 +47,12 @@ class KeywordsController < ApplicationController
     @keyword = Keyword.find(params[:id])
     
     @genres = Genre.find(:all, :order => "id")
+    
+    # @cats = Category.find(:all, :order => "id")
+    @cats = Category.find_all_by_genre_id("1", :order => "id")
+    
+    @subcats = Subcat.find(:all, :order => "id")
+    
   end
 
   # POST /keywords
@@ -116,6 +122,12 @@ class KeywordsController < ApplicationController
     
     html += %Q!</select></div>!
     
+    
+    # Button
+    html += "<br/>"
+    
+    html += %Q!<input id="show_categories" type="button" value="Categories" />!
+    
     msg = ""
     
     @categories.each do |item|
@@ -136,3 +148,4 @@ class KeywordsController < ApplicationController
   end#def ajax
   
 end
+

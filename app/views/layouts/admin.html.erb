@@ -2,9 +2,18 @@
 <html>
 <head>
   <title>NewsReader</title>
+  
+<!--  Ref => http://stackoverflow.com/questions/11110501/rails-3-2-3-load-javascript-from-public-folder-before  -->
+<!-- Ref => 黒田・佐藤: 312 -->
+  <%#= javascript_include_tag "/keywords" %>
+  
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  
+  <%#= javascript_include_tag "/js/keywords.js" %>
+  <%#= javascript_include_tag "/js/keywords" %>
+  <%#= javascript_include_tag "/keywords" %>
   
 <!--   <meta charset="euc-jp" /> -->
   

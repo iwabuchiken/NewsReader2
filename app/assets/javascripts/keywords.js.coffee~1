@@ -3,38 +3,39 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 # Refer => 黒田・佐藤: 317
+#$(document).ready(function() {
 $(document).ready ->
-    
-    # REF => http://api.jquery.com/selected-selector/
-    
-    # Get genre name and id --------------------------------
-    # $('#send_genre').click ->
-    $('select#keyword_genre_id').change ->
-        msg = $('select#keyword_genre_id option:selected').text()
-        value = $('select#keyword_genre_id option:selected').attr('value')
-        
-        alert(msg + "/" + value)
-        # $('select#keyword_genre_id option:selected').each ->  
-        # alert($(this).text())
-    
-    
-    # --------------------------------
-    $('#alert_test').click ->
-        alert("Alert test")
-
+    # $('#show_categories').click ->
+      $('#alert_test').click ->
+          alert("Alert test")
+        # $('#alert_test').html('abc')
+#     
+    # msg = "YES";
+    # # url = "/keywords/ajax"
     url = "/keywords_ajax"
-
-
-    # --------------------------------
+    # # url = "/keywords/show/1"
+#     
     # Refer => http://www.yuyak.com/1438
+#     
+    # # $('#send').click(function() {
     $('#send_button').click ->
         # # Ref => http://ja.wikipedia.org/wiki/CoffeeScript
+        # # $.get(url, ((txt) -> $("#ajax_test").text("info = #{txt}")), "text")
+#         
         # # Ref => http://www.oiax.jp/rails/coffee_script/coffee04.html
         $.get(url, 
                 ((txt) ->
                     block =  $("<b>" + "#{txt}" + "</b>")
+                    # $("#ajax_test").append(block)))
                     $("#ajax_test").html(txt)))
-
+                    # $("#ajax_test").html(txt))).show()
+                    # $("#ajax_test").text(txt.class)))
+                    # $("#ajax_test").append(txt)))
+                    # $("#ajax_test").text("#{txt}" + " " + "xyz")), "text"
+               # )
+#       
+#       
+        # # alert(url)
         # # $.post(
               # # url, msg
             # # ).success(
@@ -46,3 +47,6 @@ $(document).ready ->
             # # )
       # # alert("Send!");
       # # alert(msg);
+    # # });#$('#send').click(function()
+#     
+# # });#$(document).ready(function()

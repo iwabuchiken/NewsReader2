@@ -27,11 +27,34 @@
    		) %>
    		
   </div>
-  
+
+	<div>
+		<input id="send_genre" type="button" value="Send genre" />
+	</div>
+
   <div class="field">
     <%= f.label :category_id %><br />
-    <%= f.number_field :category_id %>
+    
+    <% if @keyword.category_id != nil %>
+    @keyword.category_id != nil<br />
+	    <%= select(
+	    			"keyword", "category_id", 
+	    			@cats.collect {|c| [c.name, c.id]},
+	    			{:include_blank => false, :selected => @keyword.category_id}
+	   		) %>
+	<% else %>
+	@keyword.category_id == nil<br />
+	    <%= select(
+	    			"keyword", "category_id", 
+	    			@cats.collect {|c| [c.name, c.id]},
+	    			{:include_blank => false}
+	   		) %>
+	<% end %>
+
+    <%#= f.number_field :category_id %>
+    
   </div>
+  
   <div class="field">
     <%= f.label :subcat_id %><br />
     <%= f.number_field :subcat_id %>

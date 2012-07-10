@@ -10,6 +10,10 @@ rails s --port 3000
 
 C:\WORKS\PROGRAMS\FreeMind\Freemind.exe C:\WORKS\WORKSPACES_APTANA\NewsReader2\NewsReader2.mm
 
+
+[Git]
+git log --grep=master -6
+
 [Set up 20120529_173711]----------------------------
 rails new NewsReader
 
