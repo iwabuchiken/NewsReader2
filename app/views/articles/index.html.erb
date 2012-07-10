@@ -34,37 +34,3 @@
 </div>
 
 <hr/>
-	<% @categories.each do |category| %>
-		<a href="#<%= category%>"><%= category %></a> | 
-	<% end %>
-
-<% @categories.length.times do |i| %>
-	<hr/>
-	<div id="<%= @categories[i] %>" class="category" >
-		<strong><%= @categories[i] %></strong> (<%= @objects[i].size %> 
-		<% if @objects[i].size < 2 %>
-			item
-		<% else %>
-			items
-		<% end %>
-		) 
-			   &nbsp;&nbsp;<a href="#top">To Top</a>
-	</div>
-	<hr/>
-
-	<% @i = 1 %>
-	<% @objects[i].each do |item| %>
-		<%#= raw item.to_html %>
-		<%# item.each do |article| %>
-			<div style="line-height: 250%;">
-				<%#= raw item[0] %>
-				<%#= raw article %>
-				<%= @i %>. <%= raw item %><br/>
-				<% @i += 1 %>
-				<%#= item.content %>
-			</div>
-		<%# end %>
-	<% end %>
-	<br/>
-
-<% end %>
